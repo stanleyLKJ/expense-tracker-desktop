@@ -1,0 +1,46 @@
+{
+  "name": "task1_app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Expense Tracker Desktop Application",
+  "author": "stanley",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "react-start": "vite",
+    "electron-start": "electron .",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "electron": "^37.0.0",
+    "electron-builder": "^25.1.8",
+    "vite": "^7.1.2"
+  },
+  "build": {
+    "appId": "com.task1.expensetracker",
+    "productName": "Expense Tracker Desktop",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/ex.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
