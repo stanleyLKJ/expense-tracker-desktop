@@ -6,6 +6,7 @@ function TransactionItem({ item, deleteTransaction }) {
         <p className={item.type}>
           {item.type === 'income' ? '+' : '-'}RM {item.amount.toFixed(2)}
         </p>
+        <small className="date-text">{item.date}</small>
       </div>
       <button onClick={() => deleteTransaction(item.id)}>Delete</button>
     </div>

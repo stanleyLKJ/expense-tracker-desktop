@@ -1,5 +1,9 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import './App.css'
+import BalanceCard from './components/BalanceCard'
+import TransactionForm from './components/TransactionForm'
+import TransactionList from './components/TransactionList'
 
 function App() {
   const [title, setTitle] = useState('')
@@ -10,11 +14,14 @@ function App() {
   const addTransaction = () => {
     if (title.trim() === '' || amount === '') return
 
+    const today = new Date().toLocaleDateString()
+
     const newTransaction = {
-      id: Date.now(),
+      id: uuidv4(),
       title,
       amount: parseFloat(amount),
-      type
+      type,
+      date: today
     }
 
     setTransactions([...transactions, newTransaction])
@@ -27,62 +34,50 @@ function App() {
     setTransactions(transactions.filter((item) => item.id !== id))
   }
 
+  const clearAllTransactions = () => {
+    setTransactions([])
+  }
+
   const balance = transactions.reduce((total, item) => {
     return item.type === 'income'
       ? total + item.amount
       : total - item.amount
   }, 0)
 
+  const totalIncome = transactions
+    .filter((item) => item.type === 'income')
+    .reduce((total, item) => total + item.amount, 0)
+
+  const totalExpense = transactions
+    .filter((item) => item.type === 'expense')
+    .reduce((total, item) => total + item.amount, 0)
+
   return (
     <div className="app-container">
       <h1>Expense Tracker Desktop</h1>
       <p className="subtitle">My Electron Finance Application</p>
 
-      <div className="balance-card">
-        <h2>Current Balance</h2>
-        <p>RM {balance.toFixed(2)}</p>
-      </div>
+      <BalanceCard
+        balance={balance}
+        totalIncome={totalIncome}
+        totalExpense={totalExpense}
+      />
 
-      <div className="form-section">
-        <input
-          type="text"
-          placeholder="Enter title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <TransactionForm
+        title={title}
+        setTitle={setTitle}
+        amount={amount}
+        setAmount={setAmount}
+        type={type}
+        setType={setType}
+        addTransaction={addTransaction}
+        clearAllTransactions={clearAllTransactions}
+      />
 
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
-        </select>
-
-        <button onClick={addTransaction}>Add Transaction</button>
-      </div>
-
-      <div className="transaction-list">
-        {transactions.length === 0 ? (
-          <p className="empty-message">No transactions yet.</p>
-        ) : (
-          transactions.map((item) => (
-            <div key={item.id} className="transaction-item">
-              <div>
-                <strong>{item.title}</strong>
-                <p className={item.type}>
-                  {item.type === 'income' ? '+' : '-'}RM {item.amount.toFixed(2)}
-                </p>
-              </div>
-              <button onClick={() => deleteTransaction(item.id)}>Delete</button>
-            </div>
-          ))
-        )}
-      </div>
+      <TransactionList
+        transactions={transactions}
+        deleteTransaction={deleteTransaction}
+      />
     </div>
   )
 }

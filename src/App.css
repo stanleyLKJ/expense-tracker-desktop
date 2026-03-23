@@ -1,92 +1,55 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #eef2f7;
-}
-
-.app-container {
-  max-width: 750px;
-  margin: 40px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 8px;
-  color: #1f2937;
-}
-
-.subtitle {
-  text-align: center;
-  color: #6b7280;
-  margin-bottom: 25px;
-}
-
-.balance-card {
-  text-align: center;
-  background: #f9fafb;
-  border: 1px solid #d1d5db;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-}
-
-.balance-card h2 {
-  margin: 0 0 10px 0;
-}
-
-.balance-card p {
-  font-size: 28px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.form-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  gap: 10px;
-  margin-bottom: 25px;
-}
-
-.form-section input,
-.form-section select,
-.form-section button {
-  padding: 12px;
-  font-size: 15px;
-}
-
-.transaction-list {
+.summary-cards {
   display: flex;
-  flex-direction: column;
   gap: 12px;
+  margin-top: 18px;
+  justify-content: center;
 }
 
-.transaction-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.summary-box {
+  flex: 1;
+  max-width: 220px;
+  background: #ffffff;
   border: 1px solid #d1d5db;
-  padding: 15px;
   border-radius: 10px;
-  background: #fafafa;
+  padding: 14px;
 }
 
-.transaction-item p {
-  margin: 6px 0 0 0;
+.summary-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
 }
 
-.income {
+.summary-box p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.income-box p {
   color: green;
 }
 
-.expense {
+.expense-box p {
   color: red;
 }
 
-.empty-message {
-  text-align: center;
-  color: #888;
+.form-section-wrapper {
+  margin-bottom: 25px;
+}
+
+.clear-section {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.clear-btn {
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.date-text {
+  display: block;
+  margin-top: 6px;
+  color: #666;
+  font-size: 12px;
 }
